@@ -1,4 +1,4 @@
-package uz.azamof.quiz_tuit
+package uz.testparser.quiz_tuit
 
 import io.flutter.embedding.android.FlutterActivity
 

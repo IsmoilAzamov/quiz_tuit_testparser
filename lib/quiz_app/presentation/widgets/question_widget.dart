@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_tuit/quiz_app/presentation/pages/result_page.dart';
@@ -19,14 +21,16 @@ class QuestionWidget extends StatelessWidget {
   builder: (context, result) {
     return BlocBuilder<QuestionNumberCubit, int>(
         builder: (context, questionNumber) {
-      return Container(
-          margin: const EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width * 0.92,
-          child:
-              BlocBuilder<QuestionsListCubit, Map<String, Map<String, String>>>(
-            builder: (context, questionList) {
-              return !isSubmetted? SingleChildScrollView(
-                child: Expanded(
+      return Center(
+        child: Container(
+            margin: const EdgeInsets.all(10),
+
+            width: MediaQuery.of(context).size.width * 0.92,
+            child:
+                BlocBuilder<QuestionsListCubit, Map<String, Map<String, String>>>(
+              builder: (context, questionList) {
+                int answerOption=Random().nextInt(4+1);
+                return !isSubmetted? SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
@@ -80,7 +84,7 @@ class QuestionWidget extends StatelessWidget {
                             padding: const EdgeInsets.all(18),
                             child: Text(
                               questionList["$questionNumber"]!["3"] ?? "",
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             )),
                       ),
                       InkWell(
@@ -135,7 +139,7 @@ class QuestionWidget extends StatelessWidget {
                                     context.read<SubmettedButtonCubit>().changeValue();
                                   },
                                   child: const Text("Submit")),
-
+                        if(isSubmetted)
                           ElevatedButton(
                             onPressed: () {
                               if (choosenAnswer != null) {
@@ -165,113 +169,113 @@ class QuestionWidget extends StatelessWidget {
                   ),
                     ],
                   ),
-                ),
-              )
+                )
 
-                  :
+                    :
 
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      "This is the Question ${questionNumber + 1}/${questionList.length}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(
+                        "This is the Question ${questionNumber + 1}/${questionList.length}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    questionList["$questionNumber"]!["1"] ?? "",
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      questionList["$questionNumber"]!["1"] ?? "",
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
 
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black12, width: 1),
-                        color: questionList["$questionNumber"]!["0"]=="2"? Colors.green :choosenAnswer==2 ?Colors.red:Colors.white54,
-                      ),
-                      padding: const EdgeInsets.all(18),
-                      child: Text(
-                        questionList["$questionNumber"]!["2"] ?? "",
-                        style: const TextStyle(fontSize: 16),
-                      )),
-                  Container(
-
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        color: questionList["$questionNumber"]!["0"]=="3"? Colors.green :choosenAnswer==3?Colors.red:Colors.white54,
-                        border: Border.all(color: Colors.black12, width: 1),
-                      ),
-                      padding: const EdgeInsets.all(18),
-                      child: Text(
-
-                        questionList["$questionNumber"]!["3"] ?? "",
-                        style: TextStyle(fontSize: 16),
-                      )),
-                  Container(
-
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black12, width: 1),
-                        color: questionList["$questionNumber"]!["0"]=="4"? Colors.green :choosenAnswer==4?Colors.red:Colors.white54,
-                      ),
-                      padding: const EdgeInsets.all(18),
-                      child: Text(
-                        questionList["$questionNumber"]!["4"] ?? "",
-                        style: const TextStyle(fontSize: 16),
-                      )),
-                  Container(
-
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        color: questionList["$questionNumber"]!["0"]=="5"? Colors.green :choosenAnswer==5 ?Colors.red:Colors.white54,
-                        border: Border.all(color: Colors.black12, width: 1),
-                      ),
-                      padding: const EdgeInsets.all(18),
-                      child: Text(
-                        questionList["$questionNumber"]!["5"] ?? "",
-                        style: const TextStyle(fontSize: 16),
-                      )),
-                  Row(
-
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-
-
-
-                        ElevatedButton(
-                          onPressed: () {
-                            if(questionList.length>questionNumber+1) {
-                              context.read<QuestionNumberCubit>().changeValue();
-                              context.read<SubmettedButtonCubit>().changeValueToFalse();
-                            }else{
-                              Navigator.pop(context);
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> ResultPage(score: result,)), (route)=>false);
-
-                            }
-                            context.read<ChoosenAnswerCubit>().changeValue(0);
-                            answerID=0;
-                          },
-                          child: const Text("Next"),
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black12, width: 1),
+                          color: questionList["$questionNumber"]!["0"]=="2"? Colors.green :choosenAnswer==2 ?Colors.red:Colors.white54,
                         ),
+                        padding: const EdgeInsets.all(18),
+                        child: Text(
+                          questionList["$questionNumber"]!["2"] ?? "",
+                          style: const TextStyle(fontSize: 16),
+                        )),
+                    Container(
 
-                      ]
-                  ),
-                ],
-              );
-            },
-          ));
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: questionList["$questionNumber"]!["0"]=="3"? Colors.green :choosenAnswer==3?Colors.red:Colors.white54,
+                          border: Border.all(color: Colors.black12, width: 1),
+                        ),
+                        padding: const EdgeInsets.all(18),
+                        child: Text(
+
+                          questionList["$questionNumber"]!["3"] ?? "",
+                          style: const TextStyle(fontSize: 16),
+                        )),
+                    Container(
+
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black12, width: 1),
+                          color: questionList["$questionNumber"]!["0"]=="4"? Colors.green :choosenAnswer==4?Colors.red:Colors.white54,
+                        ),
+                        padding: const EdgeInsets.all(18),
+                        child: Text(
+                          questionList["$questionNumber"]!["4"] ?? "",
+                          style: const TextStyle(fontSize: 16),
+                        )),
+                    Container(
+
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: questionList["$questionNumber"]!["0"]=="5"? Colors.green :choosenAnswer==5 ?Colors.red:Colors.white54,
+                          border: Border.all(color: Colors.black12, width: 1),
+                        ),
+                        padding: const EdgeInsets.all(18),
+                        child: Text(
+                          questionList["$questionNumber"]!["5"] ?? "",
+                          style: const TextStyle(fontSize: 16),
+                        )),
+                    Row(
+
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+
+
+
+                          ElevatedButton(
+                            onPressed: () {
+                              if(questionList.length>questionNumber+1) {
+                                context.read<QuestionNumberCubit>().changeValue();
+                                context.read<SubmettedButtonCubit>().changeValueToFalse();
+                              }else{
+                                Navigator.pop(context);
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> ResultPage(score: result,)), (route)=>false);
+
+                              }
+                              context.read<ChoosenAnswerCubit>().changeValue(0);
+                              answerID=0;
+                            },
+                            child: const Text("Next"),
+                          ),
+
+                        ]
+                    ),
+                  ],
+                );
+              },
+            )),
+      );
     });
   },
 );
@@ -279,5 +283,8 @@ class QuestionWidget extends StatelessWidget {
 );
   },
 );
+  }
+  checkRandom(int i){
+
   }
 }

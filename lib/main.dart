@@ -1,10 +1,14 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_tuit/quiz_app/presentation/manager/main_view_model.dart';
 import 'package:quiz_tuit/quiz_app/presentation/pages/home_page.dart';
+import 'package:quiz_tuit/quiz_app/presentation/pages/testing_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main()  {
+
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       home: MultiBlocProvider(
           providers: [
         BlocProvider(create: (context) => AutoNextCubit()),
@@ -20,10 +25,11 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context)=>QuestionsListCubit()),
             BlocProvider(create: (context)=>ResultCubit()),
             BlocProvider(create: (context)=>SubmettedButtonCubit()),
-            BlocProvider(create: (context)=>ChoosenAnswerCubit())
+            BlocProvider(create: (context)=>ChoosenAnswerCubit()),
+            BlocProvider(create: (context)=>SolvingTestCubit()),
 
 
-      ], child: HomePage()),
+      ], child: TestingPage()),
       title: "Quotes",
     );
   }

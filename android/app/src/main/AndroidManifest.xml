@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uz.azamof.quiz_tuit">
+    package="uz.testparser.quiz_tuit">
    <application
         android:label="quiz_tuit"
         android:name="${applicationName}"

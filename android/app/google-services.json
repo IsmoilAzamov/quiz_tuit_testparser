@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "151368324989",
+    "firebase_url": "https://testparser-f3a9b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "testparser-f3a9b",
+    "storage_bucket": "testparser-f3a9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151368324989:android:87f3f59338465ee6861e14",
+        "android_client_info": {
+          "package_name": "uz.testparser.quiz_tuit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151368324989-b3t9a3adt9pecnvb3lbgig12rof1il4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5gATrojF-Lce7tWGY_LufsxcJDXjClkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151368324989-b3t9a3adt9pecnvb3lbgig12rof1il4t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
