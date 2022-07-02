@@ -13,6 +13,7 @@ class TestingPage extends StatefulWidget {
 
 class _TestingPageState extends State<TestingPage> {
   bool check = false;
+  String subject = "";
 
   @override
   void initState() {
@@ -22,30 +23,17 @@ class _TestingPageState extends State<TestingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: MediaQuery
-            .of(context)
-            .size * 0.05,
-        child:
-        AppBar(
-          title: const Text("Home Page"),
-          actions: [
-            Checkbox(
-                value: false,
-                onChanged: (value) {
-
-                }),
-          ],
-
-
+    return WillPopScope(
+      onWillPop: ()=>Future.value(false),
+      child: Scaffold(
+        backgroundColor: Colors.white54,
+        appBar:AppBar(
+          title: Text("TestParser"),
+          backgroundColor: Colors.blue,
         ),
-      ),
-      body:BlocBuilder<SolvingTestCubit, bool>(
-        builder: (context, isSolving) {
-          return SingleChildScrollView(
-        child: Container(
-          color: Colors.black38,
+        body:BlocBuilder<SolvingTestCubit, bool>(
+          builder: (context, isSolving) {
+            return SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,25 +45,29 @@ class _TestingPageState extends State<TestingPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const SizedBox(height: 10,),
                           InkWell(
                             onTap: () {
 
                               context.read<SolvingTestCubit>().changeValue(
                                   true);
+                              subject="operatsion";
                             },
-                            child: customCard(context, "Amaliy Ekonometrika"),
+                            child: customCard(context, "Operatsion Tizimlar"),
                           ), // Card
                           InkWell(
                             onTap: () {
                               context.read<SolvingTestCubit>().changeValue(
                                   true);
+                              subject="econometrics";
                             },
-                            child: customCard(context, "Amaliy Ekonometrika"),
+                            child: customCard(context, " Ekonometrika"),
                           ),
                           InkWell(
                             onTap: () {
                               context.read<SolvingTestCubit>().changeValue(
                                   true);
+                              subject="makro";
                             },
                             child: customCard(context, "Makroiqtisodiyot"),
                           ), //
@@ -83,9 +75,10 @@ class _TestingPageState extends State<TestingPage> {
                             onTap: () {
                               context.read<SolvingTestCubit>().changeValue(
                                   true);
+                              subject="infocom";
                             },
 
-                            child: customCard(context, "Infokommunikatsiya"),
+                            child: customCard(context, "Infokom"),
                           ), // // / Card
                         ],
 
@@ -97,14 +90,17 @@ class _TestingPageState extends State<TestingPage> {
               if(isSolving) Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: const [
+                mainAxisSize: MainAxisSize.min,
+                children:  [
                   Center(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Card(
+
                         color: Colors.white70,
-                        child: QuestionWidget(),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height*0.89,
+                            child: QuestionWidget( subject: subject,)),
 
                       ),
 
@@ -115,9 +111,9 @@ class _TestingPageState extends State<TestingPage> {
 
             ],
           ),
+        );
+          },
         ),
-      );
-        },
       ),
     );
   }
@@ -127,13 +123,13 @@ class _TestingPageState extends State<TestingPage> {
       child: Card(
         elevation: 50,
         shadowColor: Colors.black,
-        color: Colors.greenAccent[100],
+        color: Colors.grey[300],
         child: SizedBox(
           width: MediaQuery
               .of(context)
               .size
-              .width * 0.8,
-          height: 220,
+              .width * 0.85,
+          height: 180,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -147,7 +143,7 @@ class _TestingPageState extends State<TestingPage> {
                 ), //SizedBox
                 Center(
                   child: Text(
-                    '$subject',
+                    subject,
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.green[900],

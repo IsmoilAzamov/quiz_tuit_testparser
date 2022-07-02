@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:quiz_tuit/quiz_app/presentation/manager/main_view_model.dart';
-import 'package:quiz_tuit/quiz_app/presentation/pages/home_page.dart';
-import 'package:quiz_tuit/quiz_app/presentation/pages/testing_page.dart';
+import 'package:quiz_tuit/quiz_app/presentation/pages/result_page.dart';
 
 void main()  {
 
 
-  runApp(MyApp());
+  runApp(Phoenix(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,9 +27,10 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context)=>SubmettedButtonCubit()),
             BlocProvider(create: (context)=>ChoosenAnswerCubit()),
             BlocProvider(create: (context)=>SolvingTestCubit()),
+            BlocProvider(create: (context)=>RandomListCubit()),
+            BlocProvider(create: (context)=>CurrentQuestionCubit()),
 
-
-      ], child: TestingPage()),
+      ], child: ResultPage(score: 12)),
       title: "Quotes",
     );
   }

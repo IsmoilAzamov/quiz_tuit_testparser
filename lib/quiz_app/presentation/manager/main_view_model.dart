@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AutoNextCubit extends Cubit<bool>{
@@ -7,11 +9,25 @@ class AutoNextCubit extends Cubit<bool>{
   void changeValueto(bool value)=>emit(value);
 
 }
+class CurrentQuestionCubit extends Cubit<int>{
+  CurrentQuestionCubit():super(0);
+  void changeValue()=>emit(state+1);
+}
 
 
 class QuestionNumberCubit extends Cubit<int>{
-  QuestionNumberCubit():super(0);
-  void changeValue()=>emit(state+1);
+  QuestionNumberCubit():super(Random().nextInt(100));
+  void changeValue(value)=>emit(value);
+}
+
+class RandomListCubit extends Cubit<List<int>>{
+  var rng = Random();
+
+  RandomListCubit():super([5, 3, 4, 2,]);
+  void changeValue(List<int>value){
+    value.shuffle();
+
+    emit(value);}
 }
 
 
@@ -27,7 +43,7 @@ class SubmettedButtonCubit extends Cubit<bool>{
 }
 
 class ChoosenAnswerCubit extends Cubit<int>{
-  ChoosenAnswerCubit():super(0);
+  ChoosenAnswerCubit():super(8);
   void changeValue(int value)=>emit(value);
 }
 
@@ -1852,4 +1868,8 @@ class QuestionsListCubit extends Cubit<Map<String, Map<String,String>>> {
   });
   void changeValue(Map<String, Map<String,String>> value)=>emit(value);
 
+}
+class SubjectName extends Cubit<String>{
+  SubjectName() : super('');
+  void changeValue(String value)=>emit(value);
 }
