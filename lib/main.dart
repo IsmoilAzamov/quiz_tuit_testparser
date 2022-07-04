@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:quiz_tuit/quiz_app/presentation/manager/main_view_model.dart';
 import 'package:quiz_tuit/quiz_app/presentation/pages/result_page.dart';
+import 'package:quiz_tuit/quiz_app/presentation/pages/testing_page.dart';
 
 void main()  {
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+    theme: ThemeData(primaryColor: Colors.white),
       home: MultiBlocProvider(
           providers: [
         BlocProvider(create: (context) => AutoNextCubit()),
@@ -29,8 +30,11 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context)=>SolvingTestCubit()),
             BlocProvider(create: (context)=>RandomListCubit()),
             BlocProvider(create: (context)=>CurrentQuestionCubit()),
+            BlocProvider(create: (context)=>QuestionIDListCubit()),
 
-      ], child: ResultPage(score: 12)),
+      ], child: const TestingPage(
+
+      )),
       title: "Quotes",
     );
   }

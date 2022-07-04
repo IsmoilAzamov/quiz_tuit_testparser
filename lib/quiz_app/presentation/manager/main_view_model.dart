@@ -16,7 +16,7 @@ class CurrentQuestionCubit extends Cubit<int>{
 
 
 class QuestionNumberCubit extends Cubit<int>{
-  QuestionNumberCubit():super(Random().nextInt(100));
+  QuestionNumberCubit():super(Random().nextInt(10));
   void changeValue(value)=>emit(value);
 }
 
@@ -33,7 +33,7 @@ class RandomListCubit extends Cubit<List<int>>{
 
 class ResultCubit extends Cubit<int>{
   ResultCubit():super(0);
-  void incrementScore()=>emit(state+5);
+  void incrementScore()=>emit(state+4);
 }
 
 class SubmettedButtonCubit extends Cubit<bool>{
@@ -54,7 +54,14 @@ class SolvingTestCubit extends Cubit<bool>{
 }
 
 
-
+class QuestionIDListCubit extends Cubit<List<int>>{
+  QuestionIDListCubit(): super([]);
+  void addNumber(int number, List<int> numbers){
+    numbers.add(number);
+    emit(numbers);
+  }
+  void clear()=>emit([]);
+}
 class QuestionsListCubit extends Cubit<Map<String, Map<String,String>>> {
   QuestionsListCubit() :super({
     "0":{
@@ -1869,6 +1876,8 @@ class QuestionsListCubit extends Cubit<Map<String, Map<String,String>>> {
   void changeValue(Map<String, Map<String,String>> value)=>emit(value);
 
 }
+
+
 class SubjectName extends Cubit<String>{
   SubjectName() : super('');
   void changeValue(String value)=>emit(value);

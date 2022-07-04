@@ -26,9 +26,10 @@ class _TestingPageState extends State<TestingPage> {
     return WillPopScope(
       onWillPop: ()=>Future.value(false),
       child: Scaffold(
-        backgroundColor: Colors.white54,
+     backgroundColor: Colors.white,
         appBar:AppBar(
-          title: Text("TestParser"),
+          title: const Text("TestParser"),
+
           backgroundColor: Colors.blue,
         ),
         body:BlocBuilder<SolvingTestCubit, bool>(
@@ -39,74 +40,86 @@ class _TestingPageState extends State<TestingPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-             if(!isSolving)  SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(height: 10,),
-                          InkWell(
-                            onTap: () {
+             if(!isSolving)  Center(
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   const SizedBox(height: 10,),
 
-                              context.read<SolvingTestCubit>().changeValue(
-                                  true);
-                              subject="operatsion";
-                            },
-                            child: customCard(context, "Operatsion Tizimlar"),
-                          ), // Card
-                          InkWell(
-                            onTap: () {
-                              context.read<SolvingTestCubit>().changeValue(
-                                  true);
-                              subject="econometrics";
-                            },
-                            child: customCard(context, " Ekonometrika"),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              context.read<SolvingTestCubit>().changeValue(
-                                  true);
-                              subject="makro";
-                            },
-                            child: customCard(context, "Makroiqtisodiyot"),
-                          ), //
-                          InkWell(
-                            onTap: () {
-                              context.read<SolvingTestCubit>().changeValue(
-                                  true);
-                              subject="infocom";
-                            },
+                   InkWell(
+                     onTap: () {
 
-                            child: customCard(context, "Infokom"),
-                          ), // // / Card
-                        ],
+                       context.read<SolvingTestCubit>().changeValue(
+                           true);
+                       subject="operatsion";
+                     },
+                     child: customCard(context, "Operatsion Tizimlar"),
+                   ), // Card
+            InkWell(
+            onTap: () {
+            context.read<SolvingTestCubit>().changeValue(
+            true);
+            subject="operatsion2";
+            },
 
+            child: customCard(context, "Operatsion 2"),
+            ),
+                   InkWell(
+                     onTap: () {
+                       context.read<SolvingTestCubit>().changeValue(
+                           true);
+                       subject="econometrics";
+                     },
+                     child: customCard(context, " Ekonometrika"),
+                   ),
+                   InkWell(
+                     onTap: () {
+                       context.read<SolvingTestCubit>().changeValue(
+                           true);
+                       subject="makro";
+                     },
+                     child: customCard(context, "Makroiqtisodiyot"),
+                   ), //
+                   InkWell(
+                     onTap: () {
+                       context.read<SolvingTestCubit>().changeValue(
+                           true);
+                       subject="infocom";
+                     },
+
+                     child: customCard(context, "Infokom"),
+                   ),
+                 const SizedBox(height: 20,) // / Card
+                 ],
+
+
+               ),
+             ),
+
+              if(isSolving) SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children:  [
+                    Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          child: Container(
+color: Colors.white,
+
+
+                              height: MediaQuery.of(context).size.height*0.89,
+                              width: MediaQuery.of(context).size.width,
+                              child: QuestionWidget( subject: subject,)),
+                        ),
 
                       ),
                     ),
-                  ),
-
-              if(isSolving) Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children:  [
-                  Center(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Card(
-
-                        color: Colors.white70,
-                        child: Container(
-                            height: MediaQuery.of(context).size.height*0.89,
-                            child: QuestionWidget( subject: subject,)),
-
-                      ),
-
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
 
             ],
@@ -122,8 +135,8 @@ class _TestingPageState extends State<TestingPage> {
     return Center(
       child: Card(
         elevation: 50,
-        shadowColor: Colors.black,
-        color: Colors.grey[300],
+
+        color: Colors.white,
         child: SizedBox(
           width: MediaQuery
               .of(context)

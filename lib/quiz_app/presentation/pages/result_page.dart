@@ -17,9 +17,9 @@ Color getColor(int score) {
   } else if (score < 80) {
     return Colors.yellow;
   } else if (score < 90) {
-    return Colors.green;
+    return Colors.lightGreen;
   } else {
-    return Colors.blue;
+    return Colors.lightGreenAccent;
   }
 
 }
@@ -42,74 +42,99 @@ class _ResultPageState extends State<ResultPage> {
           ),
         ),
       ),
-      body: Container(
-        color: Colors.black38,
-        child: Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+      Center(
+
+      child: Card(
+
+        elevation: 20,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        shadowColor: Colors.blueAccent,
+        color: getColor(widget.score),
+        child: Container(
+          margin: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.white,
+          ),
+
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-        Center(
-        child: Card(
-          elevation: 30,
-          color: getColor(widget.score),
-          child: Container(
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(20),
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                color: Colors.white,
+                child: const Text(
+                  "Imtihondan o`tish uchun minimal ball: 60%",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ), //Text
+              const SizedBox(height: 10,),
+              Card(
+                elevation: 10,
+                color: getColor(widget.score),
+                shadowColor: Colors.green[200],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(15),
+                  child: Text(
+                    'Natija: ${widget.score}%',
+                    style:  const TextStyle(fontSize: 36,color: Colors.white, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ), //Text
+
+            ], //<Widget>[]
+          ),
+        ),
+
+      ),
+        //Column
+      ) ,
+          const SizedBox(height: 20,),
+          Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40),
               color: Colors.white,
             ),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
 
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  color: Colors.white,
-                  child: const Text(
-                    "Imtihondan o`tish uchun minimal bal 60%",
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ), //Text
-                Card(
-                  elevation: 10,
-                  shadowColor: Colors.blue,
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      'Natija: ${widget.score}%',
-                      style: const TextStyle(fontSize: 36,color: Colors.blue, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ), //Text
-                TextButton(
-                  onPressed: (){
-                    Phoenix.rebirth(context);
-                  },
-                  child: Container(
-
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.yellow,
-                    ),
-                    padding: const EdgeInsets.all(14),
-                    child: const Text(
-                      'Restart Quiz',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
+                primary: Colors.yellow,
+                elevation: 20,
+                shadowColor: Colors.green[200],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
                 ),
 
-              ], //<Widget>[]
+              ),
+              onPressed: (){
+                Phoenix.rebirth(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(20),
+
+                child: const Text(
+                  'Qayta Urinish',
+                  style: TextStyle(color: Colors.lightBlueAccent, fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ),
-        ), //Column
-      )   ],
-        ),
+        ],
       ),
     );
   }
